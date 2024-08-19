@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+    <style>
+        body {
+            background-image: url('https://get.wallhere.com/photo/black-monochrome-text-symmetry-texture-circle-gray-background-shape-line-darkness-screenshot-black-and-white-monochrome-photography-font-100106.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333; /* Dark gray text */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .navbar {
+           width: 100%;
+           background-color: #222; /* Темный фон для навбара */
+           padding: 10px 0;
+           position: absolute;
+           top: 0;
+           left: 0;
+           text-align: center;
+           box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+       }
+
+       .navbar a {
+           color: #1E90FF; /* Ярко-голубой цвет для текста */
+           text-decoration: none;
+           font-size: 18px;
+           margin: 0 15px;
+           padding: 8px 16px;
+           border-radius: 4px;
+           transition: background-color 0.3s ease;
+       }
+
+       .navbar a:hover {
+           background-color: #1E90FF; /* Ярко-голубой цвет для фона при наведении */
+           color: #fff; /* Белый текст */
+       }
+
+        .container {
+            background-color: #333; /* White background for the container */
+            border: 2px solid #00aaff; /* Blue border */
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5); /* Голубая тень */
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1E90FF; /* Blue color for heading */
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        p strong {
+            font-size: 1.2em;
+            color: white; /* Dark gray color for labels */
+        }
+
+        span {
+            color: #00aaff; /* Blue color for data */
+        }
+
+        a, button {
+            background-color: #00aaff; /* Blue background */
+            color: #fff; /* White text */
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover, button:hover {
+            background-color: #0077cc; /* Darker blue on hover */
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<navbar class="navbar">
+    <a href="/">Home</a>
+</navbar>
+<h1>User Details</h1>
+<div class="container">
+
+    <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+
+    <a th:href="@{/users/{userId}/edit(userId=${user.user_id})}">Edit</a>
+    <form action="#" th:action="@{/users/{userId}/delete(userId=${user.user_id})}" method="post" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button type="submit">Delete</button>
+    </form>
+</div>
+</body>
+</html>

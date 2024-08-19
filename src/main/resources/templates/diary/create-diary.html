@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Diary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://get.wallhere.com/photo/black-monochrome-text-symmetry-texture-circle-gray-background-shape-line-darkness-screenshot-black-and-white-monochrome-photography-font-100106.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            color: #fff;
+        }
+
+        h1 {
+            color: #1E90FF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #1E90FF;
+        }
+
+        input[type="text"], input[type="datetime-local"], textarea, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+        }
+
+        input[type="text"]:focus, input[type="datetime-local"]:focus, textarea:focus, select:focus {
+            border-color: #1E90FF;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1E90FF;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1C86EE;
+        }
+
+        input[type="file"] {
+            background-color: #222;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            width: calc(100% - 22px);
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: block;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            background: #1E90FF;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            background: #1C86EE;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Create New Diary</h1>
+    <form action="#" th:action="@{/diaries}" th:object="${diary}" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" placeholder="Enter diary title" required />
+
+        <label for="content">Content:</label>
+        <textarea id="content" th:field="*{content}" placeholder="Write your diary content here" required></textarea>
+
+        <label for="tags">Tags (comma separated):</label>
+        <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags" />
+
+        <label for="photoLink">Photo Link (optional):</label>
+        <input type="text" id="photoLink" name="photoLink" />
+
+        <button type="submit">Create Diary</button>
+    </form>
+</div>
+</body>
+</html>

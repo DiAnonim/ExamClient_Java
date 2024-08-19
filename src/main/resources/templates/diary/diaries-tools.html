@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Diaries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://get.wallhere.com/photo/black-monochrome-text-symmetry-texture-circle-gray-background-shape-line-darkness-screenshot-black-and-white-monochrome-photography-font-100106.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #222; /* Темный фон для навбара */
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #1E90FF; /* Ярко-голубой цвет для текста */
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #1E90FF; /* Ярко-голубой цвет для фона при наведении */
+            color: #fff; /* Белый текст */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            color: #fff;
+            margin-top: 70px; /* Отступ сверху для учёта фиксированного navbar */
+        }
+
+        h1 {
+            color: #1E90FF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .create-diary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .create-diary button {
+            padding: 10px 20px;
+            background-color: #1E90FF;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .create-diary button:hover {
+            background-color: #1C86EE;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+            width: 200px;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #1E90FF;
+        }
+
+        .diary-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .diary-item {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .diary-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .diary-item h2 {
+            color: #1E90FF;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .diary-item a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+
+        .diary-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <a href="@{/users/{userId}(userId=${user.user_id})}">View Profile</a>
+</nav>
+<div class="container">
+    <div class="create-diary">
+        <p>${user.user_id}</p>
+        <a th:href="@{/diaries/create}">
+            <button>Create New Diary</button>
+        </a>
+        <div class="search-container">
+            <input type="text" placeholder="Search by title" th:action="@{/diaries/search}" />
+        </div>
+    </div>
+    <hr>
+    <br>
+    <h1>My Diaries</h1>
+    <div class="diary-list">
+        <div th:each="diary : ${diaries}" class="diary-item">
+            <img th:src="${diary.photoLink}" alt="Diary Image" />
+            <div>
+                <h2 th:text="${diary.title}">Diary Title</h2>
+                <p>
+                    <a th:href="@{/diaries/{id}(id=${diary.diary_id})}">View Details</a> |
+                    <a th:href="@{/diaries/{id}/edit(id=${diary.diary_id})}">Edit</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

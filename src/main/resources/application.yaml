@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ExamClient
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+server:
+  port: 8082
+
+basicURL: http://localhost:8081

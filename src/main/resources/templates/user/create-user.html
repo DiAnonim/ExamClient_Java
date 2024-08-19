@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create User</title>
+    <style>
+        body {
+           font-family: Arial, sans-serif;
+           background-image: url('https://get.wallhere.com/photo/black-monochrome-text-symmetry-texture-circle-gray-background-shape-line-darkness-screenshot-black-and-white-monochrome-photography-font-100106.jpg');
+           background-size: cover;
+           background-position: center;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+       }
+
+       .navbar {
+           width: 100%;
+           background-color: #222; /* Темный фон для навбара */
+           padding: 10px 0;
+           position: absolute;
+           top: 0;
+           left: 0;
+           text-align: center;
+           box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+       }
+
+       .navbar a {
+           color: #1E90FF; /* Ярко-голубой цвет для текста */
+           text-decoration: none;
+           font-size: 18px;
+           margin: 0 15px;
+           padding: 8px 16px;
+           border-radius: 4px;
+           transition: background-color 0.3s ease;
+       }
+
+       .navbar a:hover {
+           background-color: #1E90FF; /* Ярко-голубой цвет для фона при наведении */
+           color: #fff; /* Белый текст */
+       }
+
+       .container {
+           width: 100%;
+           max-width: 400px;
+           margin-top: 80px; /* Отступ от навбара */
+       }
+
+       h1 {
+           color: #1E90FF; /* Ярко-голубой цвет */
+           font-size: 28px;
+           margin-bottom: 20px;
+           text-align: center;
+       }
+
+       form {
+           background-color: rgba(0, 0, 0, 0.8);
+           padding: 30px;
+           border-radius: 10px;
+           box-shadow: 0 0 15px rgba(30, 144, 255, 0.5); /* Голубая тень */
+           max-width: 400px;
+           width: 100%;
+           margin-top: -10px; /* Центрируем заголовок */
+       }
+
+       label {
+           display: block;
+           margin-bottom: 8px;
+           font-weight: bold;
+           color: #1E90FF; /* Ярко-голубой цвет */
+       }
+
+       .hint {
+           font-size: 12px;
+           color: #999; /* Светло-серый цвет для подсказок */
+           margin-bottom: 15px;
+       }
+
+       input[type="text"],
+       input[type="email"],
+       input[type="password"] {
+           width: calc(100% - 20px);
+           padding: 10px;
+           margin-bottom: 20px;
+           border: 1px solid #555; /* Тёмно-серый цвет */
+           border-radius: 4px;
+           font-size: 14px;
+           background-color: #222; /* Тёмный фон */
+           color: #fff; /* Белый текст */
+       }
+
+       input[type="text"]:focus,
+       input[type="email"]:focus,
+       input[type="password"]:focus {
+           border-color: #1E90FF; /* Ярко-голубой цвет при фокусе */
+       }
+
+       input::placeholder {
+           color: #777; /* Тёмно-серый цвет для placeholder */
+       }
+
+       button {
+           width: 100%;
+           padding: 10px;
+           background-color: #1E90FF; /* Ярко-голубой цвет */
+           border: none;
+           border-radius: 4px;
+           color: #fff; /* Белый текст */
+           font-size: 16px;
+           cursor: pointer;
+           margin-top: 10px;
+       }
+
+       button:hover {
+           background-color: #1C86EE; /* Немного темнее при наведении */
+       }
+    </style>
+</head>
+<body>
+<navbar class="navbar">
+    <a href="/">Home</a>
+</navbar>
+<div class="container">
+    <h1>Create New User</h1>
+    <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+        <label for="username">Username:</label>
+        <div class="hint">Username must be unique and contain 3-20 characters.</div>
+        <input type="text" id="username" th:field="*{username}" placeholder="Enter your username" required/>
+        <br/>
+
+        <label for="email">Email:</label>
+        <div class="hint">Please enter a valid email address (e.g., name@example.com).</div>
+        <input type="email" id="email" th:field="*{email}" placeholder="Enter your email" required/>
+        <br/>
+
+        <label for="password">Password:</label>
+        <div class="hint">Password must be at least 8 characters long.</div>
+        <input type="password" id="password" th:field="*{password}" placeholder="Enter your password" required/>
+        <br/>
+
+        <button type="submit">Create</button>
+    </form>
+</div>
+</body>
+</html>
